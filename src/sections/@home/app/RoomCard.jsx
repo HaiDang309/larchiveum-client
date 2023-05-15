@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Link, Card, Grid, Avatar, Typography, CardContent } from '@mui/material';
 // utils
-import { fDate } from '../../../utils/formatTime';
-import { fShortenNumber } from '../../../utils/formatNumber';
+import { fDate } from 'src/utils/formatTime';
+import { fShortenNumber } from 'src/utils/formatNumber';
 //
 import SvgColor from 'src/components/svg-color';
 import Iconify from 'src/components/iconify';
@@ -51,20 +51,18 @@ const StyledCover = styled('img')({
 
 // ----------------------------------------------------------------------
 
-BlogPostCard.propTypes = {
+RoomCard.propTypes = {
   post: PropTypes.object.isRequired,
   index: PropTypes.number,
 };
 
-export default function BlogPostCard({ post, index }) {
-  const { cover, title, view, comment, share, author, createdAt } = post;
+export default function RoomCard({ post, index }) {
+  const { thumbnail, title, reservationCount, author, startDate, endDate } = post;
   const latestPostLarge = index === 0;
   const latestPost = index === 1 || index === 2;
 
   const POST_INFO = [
-    { number: comment, icon: 'eva:message-circle-fill' },
-    { number: view, icon: 'eva:eye-fill' },
-    { number: share, icon: 'eva:share-fill' },
+    { number: reservationCount, icon: 'eva:people-fill' },
   ];
 
   return (
@@ -105,8 +103,8 @@ export default function BlogPostCard({ post, index }) {
             }}
           />
           <StyledAvatar
-            alt={author.name}
-            src={author.avatarUrl}
+            alt={author.username}
+            src={author.avatar}
             sx={{
               ...((latestPostLarge || latestPost) && {
                 zIndex: 9,
@@ -118,7 +116,7 @@ export default function BlogPostCard({ post, index }) {
             }}
           />
 
-          <StyledCover alt={title} src={cover} />
+          <StyledCover alt={title} src={thumbnail} />
         </StyledCardMedia>
 
         <CardContent
@@ -132,7 +130,7 @@ export default function BlogPostCard({ post, index }) {
           }}
         >
           <Typography gutterBottom variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
-            {fDate(createdAt)}
+            {fDate(startDate)} ~ {fDate(endDate)}
           </Typography>
 
           <StyledTitle

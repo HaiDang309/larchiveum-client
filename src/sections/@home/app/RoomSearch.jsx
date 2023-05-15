@@ -14,11 +14,11 @@ const StyledPopper = styled((props) => <Popper placement="bottom-start" {...prop
 
 // ----------------------------------------------------------------------
 
-BlogPostsSearch.propTypes = {
+RoomSearch.propTypes = {
   posts: PropTypes.array.isRequired,
 };
 
-export default function BlogPostsSearch({ posts }) {
+export default function RoomSearch({ posts }) {
   return (
     <Autocomplete
       sx={{ width: 280 }}

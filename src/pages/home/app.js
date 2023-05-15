@@ -4,7 +4,7 @@ import { useTheme } from "@mui/material/styles";
 import { Grid, Container, Typography, Stack,Button } from "@mui/material";
 // components
 import Iconify from "src/components/iconify";
-import posts from "src/_mock/blog";
+import posts from "src/_mock/room";
 import { RoomSearch,RoomCard, RoomSort } from "src/sections/@home/app";
 // sections
 
@@ -21,14 +21,7 @@ export default function DashboardAppPage() {
   return (
     <>
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" gutterBottom>
-            Blog
-          </Typography>
-          <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New Post
-          </Button>
-        </Stack>
+        
 
         <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
           <RoomSearch posts={posts} />
