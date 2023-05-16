@@ -1,16 +1,27 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+
+import Link from "next/link";
 // @mui
-import { styled } from '@mui/material/styles';
-import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
+import { styled } from "@mui/material/styles";
+import {
+  Box,
+  Stack,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Link as MUILink,
+} from "@mui/material";
 // utils
-import { bgBlur } from 'src/utils/cssStyles';
+import { bgBlur } from "src/utils/cssStyles";
 // components
-import Iconify from 'src/components/iconify';
+import Iconify from "src/components/iconify";
 //
-import Searchbar from './Searchbar';
-import AccountPopover from './AccountPopover';
-import LanguagePopover from './LanguagePopover';
-import NotificationsPopover from './NotificationsPopover';
+import AccountPopover from "./AccountPopover";
+import LanguagePopover from "./LanguagePopover";
+import NotificationsPopover from "./NotificationsPopover";
+import navConfig from "../nav/config";
+
+import useResponsive from "src/hooks/useResponsive";
 
 // ----------------------------------------------------------------------
 
@@ -22,15 +33,14 @@ const HEADER_DESKTOP = 92;
 
 const StyledRoot = styled(AppBar)(({ theme }) => ({
   ...bgBlur({ color: theme.palette.background.default }),
-  boxShadow: 'none',
-  [theme.breakpoints.up('lg')]: {
-    width: `calc(100% - ${NAV_WIDTH + 1}px)`,
-  },
+  // boxShadow: "none",
 }));
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
   minHeight: HEADER_MOBILE,
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up("lg")]: {
     minHeight: HEADER_DESKTOP,
     padding: theme.spacing(0, 5),
   },
@@ -43,6 +53,7 @@ Header.propTypes = {
 };
 
 export default function Header({ onOpenNav }) {
+  const isDesktop = useResponsive("up", "lg");
   return (
     <StyledRoot>
       <StyledToolbar>
@@ -50,15 +61,24 @@ export default function Header({ onOpenNav }) {
           onClick={onOpenNav}
           sx={{
             mr: 1,
-            color: 'text.primary',
-            display: { lg: 'none' },
+            color: "text.primary",
+            display: { lg: "none" },
           }}
         >
           <Iconify icon="eva:menu-2-fill" />
         </IconButton>
 
-        <Searchbar />
-        <Box sx={{ flexGrow: 1 }} />
+        {isDesktop && <div>Logo</div>}
+
+        {isDesktop && (
+          <Stack direction="row" alignItems="center" spacing={2}>
+            {navConfig.map((item) => (
+              <MUILink component={Link} key={item.title} href={item.path}>
+                {item.title}
+              </MUILink>
+            ))}
+          </Stack>
+        )}
 
         <Stack
           direction="row"
