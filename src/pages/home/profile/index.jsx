@@ -1,5 +1,7 @@
 import { Grid, Paper, Stack, Button, TextField } from "@mui/material";
 
+import dynamic from 'next/dynamic'
+
 import { useForm, Controller } from "react-hook-form";
 
 import HomeLayout from "src/layouts/home";
@@ -45,4 +47,6 @@ const ProfilePage = () => {
 
 ProfilePage.layout = HomeLayout;
 
-export default ProfilePage;
+export default dynamic(() => Promise.resolve(ProfilePage), {
+  ssr: false,
+});

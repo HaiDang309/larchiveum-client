@@ -1,11 +1,13 @@
 import "src/styles/globals.css";
 
+import dynamic from 'next/dynamic'
+
 import ThemeProvider from "src/theme";
 
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
-export default function App({ Component, pageProps }) {
+const App = ({ Component, pageProps }) =>{
   const Layout = Component.layout || (({ children }) => <>{children}</>);
   return (
     <ThemeProvider>
@@ -17,3 +19,7 @@ export default function App({ Component, pageProps }) {
     </ThemeProvider>
   );
 }
+
+export default dynamic(() => Promise.resolve(App), {
+  ssr: false,
+});
