@@ -7,6 +7,7 @@ import Container from "@mui/material/Container";
 
 import HomeLayout from "src/layouts/home";
 import { QuizManagement } from "src/sections/@home/content/quiz";
+import { DocumentManagement } from "src/sections/@home/content/document";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -32,8 +33,8 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
+    id: `tab-${index}`,
+    "aria-controls": `tabpanel-${index}`,
   };
 }
 
@@ -63,10 +64,10 @@ const ContentPage = () => {
           <QuizManagement />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
+          <DocumentManagement />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Item Three
+          Maps
         </TabPanel>
       </Box>
     </Container>
