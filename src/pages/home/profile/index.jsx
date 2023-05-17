@@ -47,6 +47,4 @@ const ProfilePage = () => {
 
 ProfilePage.layout = HomeLayout;
 
-export default dynamic(() => Promise.resolve(ProfilePage), {
-  ssr: false,
-});
+export default ProfilePage

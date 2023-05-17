@@ -30,7 +30,7 @@ import { UserListHead, UserListToolbar } from "src/sections/@home/user";
 // mock
 import USERLIST from "src/_mock/user";
 
-import HomeLayout from 'src/layouts/home'
+import HomeLayout from "src/layouts/home";
 
 // ----------------------------------------------------------------------
 
@@ -254,7 +254,7 @@ const UserPage = () => {
                       );
                     })}
                   {emptyRows > 0 && (
-                    <TableRow >
+                    <TableRow>
                       <TableCell colSpan={6} />
                     </TableRow>
                   )}
